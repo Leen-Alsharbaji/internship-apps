@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="overlay">
+        <div class="card" style="width: 25rem;height: 30rem;">
+            <div class="card-body">
+                <h5 class="card-title"> <input type="text " placeholder="search for city"> <button class="btn btn-primary" onclick="searchWeather()">Search</button></h5>
+                <h2 class="card-subtitle mb-2 text-body-secondary"></h2>
+                <p class="card-text"></p>
+                
+            </div>
+            
+        </div>
+         <div class="card" style="width: 25rem;height: 30rem;">
+            <div class="card-body">
+                <h2 class="card-title"> 5 Day weather forecast</h2>
+                <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+                <p class="card-text"></p>
+            
+            </div>
+            
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        function searchWeather() {
+           
+            const city = document.querySelector('input').value;
+        
+            const apiKey = ''; 
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                   
+                    document.querySelector('.card-subtitle').textContent = `Current weather in ${data.name}`;
+                    document.querySelector('.card-text').textContent = `Temperature: ${data.main.temp}°C, Weather: ${data.weather[0].description}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    alert('Check for Typos and try again!');
+                });
+        }
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
