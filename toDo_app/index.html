@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo App</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<header>TO-DO APP</header>
+<div class="newTask">
+    <input class="form-control" type="text" placeholder="Enter a new task" id="taskInput">
+    <button   class="btn btn-primary" id="addTaskBtn" onclick="AddTask()">&#10010;</button>
+     <button  class="btn btn-danger" onclick="cleanList()">Clear</button>
+</div>
+
+<div class="clear" id="taskList">
+   
+    <ul  class="list-group" id="myList">
+        
+    </ul>
+</div>
+
+<script>
+function AddTask(){
+    const taskInput = document.getElementById("taskInput").value;
+    if(taskInput === ""){
+        alert("Please enter a task!");
+        return;
+    }
+    const node = document.createElement("li");
+    const textnode = document.createTextNode(taskInput);
+    node.appendChild(textnode);
+    node.className = "list-group-item d-flex justify-content-between align-items-center";
+
+    document.getElementById("myList").appendChild(node);
+
+
+    //add remove btn
+    const removebtn = document.createElement("button");
+    removebtn.innerHTML ='&#10134;';
+    removebtn.className = "removeBtn";
+    
+    removebtn.onclick = function() {
+        node.remove();
+    };
+    node.appendChild(removebtn);
+
+    //clear input
+    document.getElementById("taskInput").value = "";
+
+
+
+
+}
+
+function cleanList(){
+    document.getElementById("myList").innerHTML = "";
+}
+
+</script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+</html>
